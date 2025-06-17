@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Patient Registration</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: white;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #333;
+    }
+    .navbar 
+    {
+     display: flex;
+     justify-content: space-between;
+            align-items: center;
+            padding: 12px 5%;
+            background-color: var(--white);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .logo-text {
+            font-size: 20px;
+            font-weight: bold;
+            color: var(--text-dark);
+        }
+    .nav-links {
+            display: flex;
+            align-items: center;
+            list-style: none;
+        }
+
+        .nav-item {
+            position: relative;
+            margin-left: 20px;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #134f73;
+            font-weight: 500;
+            font-size: 15px;
+            padding: 8px 15px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            border: 2px solid #134f73;
+            background-color: var(--white);
+            display: inline-block;
+        }
+
+        .nav-link:hover {
+            background-color: var(--light-yellow);
+        }
+
+    .container {
+      max-width: 500px;
+      margin: 60px auto;
+      padding: 30px 40px;
+      background-color: #fffbea;
+      box-shadow: 0 0 15px rgba(255, 208, 0, 0.4);
+      border-radius: 12px;
+      border: 2px solid #20b4d8;
+    }
+
+    h2 {
+      text-align: center;
+      color: #d4af37;
+    }
+
+    label {
+      display: block;
+      margin: 10px 0 5px;
+      font-weight: bold;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    select {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    .terms {
+      margin: 10px 0;
+    }
+
+    .terms a {
+      color: #d4af37;
+      text-decoration: none;
+    }
+
+    .terms a:hover {
+      text-decoration: underline;
+    }
+
+    .btn {
+      background-color: #ffd700;
+      border: none;
+      color: #333;
+      padding: 10px 20px;
+      font-size: 16px;
+      margin-top: 10px;
+      cursor: pointer;
+      border-radius: 6px;
+      width: 100%;
+    }
+
+    .btn:hover {
+      background-color: #e6c200;
+    }
+
+    .section-title {
+      margin-top: 20px;
+      font-size: 18px;
+      color: #b8860b;
+    }
+
+    small {
+      font-size: 12px;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="logo">
+            <img src="Recure_logo.png" alt="ReCure Logo">
+            <span class="logo-text">ReCure</span>
+        </div>
+    <ul class="nav-links">
+      <div class="nav-item">
+        <a href="index.html" class="nav-link">Home</a>
+      </div>
+    </ul>
+  </nav>
+  <div class="container">
+    <h2>Paitent Registration</h2>
+    <p style="text-align: center;">Register to access  ReCure </p>
+
+    <div class="section-title">Personal Information</div>
+    <label for="full-name">Full Name</label>
+    <input type="text" id="full-name" placeholder="Enter your name">
+
+    <label for="email">Email ID</label>
+    <input type="email" id="email" placeholder="Enter your email">
+
+    <label for="contact">Contact Number</label>
+    <input type="text" id="contact" placeholder="Enter your mobile number">
+
+    <label for="password">Password</label>
+    <input type="password" id="password" maxlength="10" placeholder="Max 10 characters">
+    <small id="password-strength-text"></small>
+
+    <label for="confirm-password">Confirm Password</label>
+    <input type="password" id="confirm-password" placeholder="Re-enter password">
+
+    <div class="section-title">Hospital Information</div>
+    <label for="college">Hospital Name</label>
+    <input type="text" id="college" placeholder="Enter your hospital name">
+
+    <label for="branch">Branch</label>
+    <input type="text" id="branch" placeholder="e.g.  Vidyavihar">
+
+    
+
+    <div class="terms">
+      <input type="checkbox" id="agree">
+      <label for="agree">I agree to the <a href="#">Terms & Conditions</a></label>
+      <!-- Takes to the hospital's terms and conditions-->
+    </div>
+
+    <button class="btn">Register</button>
+  </div>
+
+  <script>
+    const passwordInput = document.getElementById('password');
+    const strengthText = document.getElementById('password-strength-text');
+
+    passwordInput.addEventListener('input', () => {
+      const password = passwordInput.value;
+      const hasUpper = /[A-Z]/.test(password);
+      const hasLower = /[a-z]/.test(password);
+      const hasSpecial = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+
+      let strength = 0;
+      if (hasUpper) strength++;
+      if (hasLower) strength++;
+      if (hasSpecial) strength++;
+
+      if (password.length === 0) {
+        passwordInput.style.backgroundColor = 'white';
+        strengthText.textContent = '';
+      } else if (strength === 1 || password.length < 6) {
+        passwordInput.style.backgroundColor = '#ffcccc';
+        strengthText.textContent = 'Weak password';
+        strengthText.style.color = '#cc0000';
+      } else if (strength === 2) {
+        passwordInput.style.backgroundColor = '#fff4cc';
+        strengthText.textContent = 'Moderate password';
+        strengthText.style.color = '#ff9900';
+      } else if (strength === 3 && password.length >= 6) {
+        passwordInput.style.backgroundColor = '#d4fcd4';
+        strengthText.textContent = 'Strong password';
+        strengthText.style.color = '#33cc33';
+      }
+    });
+  </script>
+</body>
+</html>
